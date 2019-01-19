@@ -1,0 +1,77 @@
+body {
+    margin: 0px;
+    background-image: linear-gradient( #ffffff, #dddddd);
+}
+
+.header {
+    height: 120px;
+    text-align: left;
+    min-height: 120px !important;
+    min-width: 750px;
+    font-family: Arial;
+    background-image: linear-gradient(rgb(59, 187, 59), rgb(125, 255, 125));
+    border: 2px solid rgb(86, 226, 86);
+    border-radius: 10px;
+}
+
+a.home {
+    float: left;
+    height: 100%;
+    font-size: 55px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #333333;
+}
+
+.logo {
+    height: 90%;
+    margin-top: 5px;
+    float: left;
+}
+
+div.storename {
+    margin: 10px;
+    float: left;
+    color: rgb(0, 0, 0);
+    padding-top: 20px;
+}
+
+div.usermenu {
+    float: right;
+    height: 100%;
+    text-align: right;
+    
+}
+
+a.cart {
+    margin-top: 7px;
+    height: 70%;
+    float: left;
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    color: rgb(23, 78, 23);
+}
+
+a.userbutton {
+    float: right;
+    padding: 5px;
+    margin: 1px;
+    min-width: 60px;
+    background-color: rgb(23, 78, 23);
+    text-decoration: none;
+    text-align: center;
+    color: white;
+    display: block;
+    border: 1px solid #222222;
+    border-radius: 5px;
+}
+
+.footer {
+    height: 120px;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    background-image: linear-gradient( #efefef, #cccccc);
+}

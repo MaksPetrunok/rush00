@@ -10,21 +10,14 @@
 // if user added sucsessfully - redirect to login page
 // else show error
 
+include ('../tools.php');
+include ('create.php');
+
 function check_input($str) {
     $str = trim($str);
     $str = stripslashes($str);
     $str = htmlspecialchars($str);
     return $str;
-}
-
-function check_email_exists($email) {
-
-    return (true);
-}
-
-function create_user($firstname, $lastname, $email, $passwd, $phone) {
-    $err_msg = "";
-    return ($err_msg);
 }
 
 include ('../templ/header.php');
@@ -54,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     // Email
     if (!empty($_POST["email"])) {
         $email = check_input($_POST["email"]);
-        if (!preg_match("/^[A-Za-z]+[.]?[A-Za-z]*@[A-Za-z]+[.]?[A-Za-z]+$/", $email)) {
+        if (!preg_match("/^[A-Za-z]+[.]?[A-Za-z]*@[A-Za-z]+([.]?[A-Za-z]+)+$/", $email)) {
             $email_err = "Email pattern is not correct";
         } else if (check_email_exists($email)) {
             $email_err = "User with email ".$email." already registered on this site";

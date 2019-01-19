@@ -42,20 +42,20 @@ else
         </a>
 
 <?php if ($is_logged): ?>
-        <a class="userbutton" href="logout.php">
+        <a class="userbutton" href="/logout.php">
             Log Out
         </a>        
 <?php else: ?>
         <a class="userbutton" href="/register/">
             Register
         </a>
-        <a class="userbutton" href="login.php">
+        <a class="userbutton" href="/login.php">
             Log In
         </a>
 <?php endif; ?>
 
 <?php if ($is_admin): ?>
-        <a class="userbutton" href="admin.php">
+        <a class="userbutton" href="/admin/index.php">
             Admin
         </a>
 <?php endif; ?>

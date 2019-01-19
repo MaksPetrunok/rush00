@@ -1,51 +1,40 @@
 <?php
 
-function user_exists($name, $all) {
-    foreach($all as $usr) {
-        if ($usr['login'] == $name)
-            return (true);
+function check_email_exists($email) {
+    $dbc = connect_db('store');
+    if ($dbc) {
+        $query = "SELECT Email from users";
+        if ($result = mysqli_query($dbc, $query))
+        {
+            while ($row = mysqli_fetch_row($result)) {
+                if ($row[0] === $email)
+                    return (true);
+            }
+            mysqli_free_result($result);
+        }
+        mysqli_close($dbc);
     }
     return (false);
 }
 
-function create_account($name, $pass) {
-    $new_user = array(
-        'login' => $name,
-        'passwd' => hash('whirlpool', substr($pass, 0, 1).substr($name, 1, 0).$pass)
-    );
-    return ($new_user);
-}
-
-$users_data_dir = "../private";
-$users_data = $users_data_dir."/passwd";
-$login = $_POST['login'];
-$pw = $_POST['passwd'];
-
-if ($_POST['submit'] != 'OK' || $login == '' || $pw == '') {
-    echo "ERROR\n";
-    exit();
-}
-
-if (file_exists($users_data))
-{
-    $users = unserialize(file_get_contents($users_data));
-    if (!user_exists($login, $users)) {
-        $users[] = create_account($login, $pw);
-        file_put_contents($users_data, serialize($users));
+function create_user($firstname, $lastname, $email, $passwd, $phone) {
+    $err_msg = "";
+    $dbc = connect_db('store');
+    if ($dbc) {
+        $hash = hash_password($passwd);
+        $query = "INSERT INTO users (" .
+                 "Email, Password, FirstName, LastName, PhoneNumber)" .
+                 "VALUES (" .
+                 "'$email', '$hash', '$firstname', '$lastname', '$phone')";
+        $result = mysqli_query($dbc, $query);
+        if (!$result) {
+            $err_msg = "Cannot write data to database.<br/>";
+        }
+    } else {
+        $err_msg = "Error " . mysqli_connect_errno() . ": " . mysqli_connect_error() . ".<br/>";
     }
-    else
-    {
-        echo "ERROR\n";
-        exit();
-    }
+    mysqli_close($dbc);
+    return ($err_msg);
 }
-else
-{
-    mkdir($users_data_dir);
-    $users = array();
-    $users[] = create_account($login, $pw);
-    file_put_contents($users_data, serialize($users));
-}
-echo "OK\n";
 
 ?>

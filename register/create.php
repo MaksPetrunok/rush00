@@ -1,20 +1,23 @@
 <?php
 
 function check_email_exists($email) {
+    $result = false;
     $dbc = connect_db('store');
     if ($dbc) {
         $query = "SELECT Email from users";
         if ($result = mysqli_query($dbc, $query))
         {
             while ($row = mysqli_fetch_row($result)) {
-                if ($row[0] === $email)
-                    return (true);
+                if ($row[0] === $email) {
+                    $result = true;
+                    break;
+                }
             }
             mysqli_free_result($result);
         }
         mysqli_close($dbc);
     }
-    return (false);
+    return ($result);
 }
 
 function create_user($firstname, $lastname, $email, $passwd, $phone) {

@@ -4,7 +4,7 @@
 ?>
 
     <div class="main">
-
+        HOME
     </div>
 
 

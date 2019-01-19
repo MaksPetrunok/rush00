@@ -5,8 +5,6 @@ function is_admin($user) {
 }
 
 session_start();
-//session_destroy();
-//echo $_SESSION['logged_on_user'];
 
 $is_logged = $_SESSION['logged_on_user'] != '';
 if ($is_logged)
